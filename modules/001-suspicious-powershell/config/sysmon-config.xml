@@ -1,0 +1,24 @@
+<!-- Sysmon config pour Module SOC-001.
+     Installation : sysmon64.exe -accepteula -i sysmon-config.xml
+     Mise à jour  : sysmon64.exe -accepteula -c sysmon-config.xml
+     Événements activés : 1 (Process Create) et 22 (DNS query) - suffisant pour ce use case. -->
+<Sysmon schemaversion="4.90">
+  <EventFiltering>
+    <!-- Journaliser TOUTES les créations de processus : requis par les règles 100001-100009 -->
+    <ProcessCreate onmatch="exclude"/>
+    <!-- Journaliser TOUTES les requêtes DNS : corrélation download cradle / C2 -->
+    <DnsQuery onmatch="exclude"/>
+    <!-- Toutes les autres catégories désactivées (pattern include avec condition impossible) -->
+    <FileCreateTime onmatch="include"><Image condition="is">disabled</Image></FileCreateTime>
+    <NetworkConnect onmatch="include"><Image condition="is">disabled</Image></NetworkConnect>
+    <ProcessTerminate onmatch="include"><Image condition="is">disabled</Image></ProcessTerminate>
+    <ImageLoad onmatch="include"><Image condition="is">disabled</Image></ImageLoad>
+    <CreateRemoteThread onmatch="include"><Image condition="is">disabled</Image></CreateRemoteThread>
+    <ProcessAccess onmatch="include"><Image condition="is">disabled</Image></ProcessAccess>
+    <FileCreate onmatch="include"><Image condition="is">disabled</Image></FileCreate>
+    <RegistryEvent onmatch="include"><Image condition="is">disabled</Image></RegistryEvent>
+    <DriverLoad onmatch="include"><Image condition="is">disabled</Image></DriverLoad>
+    <PipeEvent onmatch="include"><Image condition="is">disabled</Image></PipeEvent>
+    <WmiEvent onmatch="include"><Image condition="is">disabled</Image></WmiEvent>
+  </EventFiltering>
+</Sysmon>

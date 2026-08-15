@@ -1,0 +1,17 @@
+# Logs et artefacts
+*.log
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+
+# Python (futurs outils)
+__pycache__/
+*.pyc
+.venv/
+
+# Secrets — ne JAMAIS committer
+*.pem
+*.key
+.env
+credentials*

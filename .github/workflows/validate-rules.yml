@@ -1,0 +1,11 @@
+name: Validate Wazuh rules XML
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate all XML files
+        run: |
+          sudo apt-get update && sudo apt-get install -y libxml2-utils
+          find . -name "*.xml" -print0 | xargs -0 -n1 xmllint --noout
